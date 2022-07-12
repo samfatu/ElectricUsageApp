@@ -8,7 +8,11 @@ const Header = (props: NativeStackHeaderProps) => {
   return (
     <Appbar.Header>
       {back ? <Appbar.BackAction onPress={navigation.goBack} /> : null}
-      <Appbar.Content title="Electric Usage" style={{ alignItems: 'center' }} />
+      <Appbar.Content
+        title="Electric Usage"
+        style={{ marginLeft: 0, position: 'absolute', left: 0, right: 0 }}
+        titleStyle={{ alignSelf: 'center' }}
+      />
     </Appbar.Header>
   )
 }
