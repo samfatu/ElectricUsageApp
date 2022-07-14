@@ -79,7 +79,7 @@ export const deviceList : Device[] = [
   {
     id: '1125',
     name: 'Cell Phone',
-    iconName: 'cell-phone',
+    iconName: 'phone',
     watt: 4,
     count: 5,
     dailyHours: 1,
@@ -124,7 +124,7 @@ export const deviceList : Device[] = [
   {
     id: '1182',
     name: 'Cell Phone',
-    iconName: 'cell-phone',
+    iconName: 'phone',
     watt: 4,
     count: 5,
     dailyHours: 1,
@@ -169,7 +169,7 @@ export const deviceList : Device[] = [
   {
     id: '11442',
     name: 'Cell Phone',
-    iconName: 'cell-phone',
+    iconName: 'phone',
     watt: 4,
     count: 5,
     dailyHours: 1,
@@ -214,7 +214,7 @@ export const deviceList : Device[] = [
   {
     id: '1112312',
     name: 'Cell Phone',
-    iconName: 'cell-phone',
+    iconName: 'phone',
     watt: 4,
     count: 5,
     dailyHours: 1,
