@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { Avatar } from 'react-native-paper';
 import { heightPercentageToDP as hp, widthPercentageToDP as wp } from 'react-native-responsive-screen';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import { PreferencesContext } from '../context/PreferencesContext';
 import { Device } from '../types';
 interface DeviceItemProps {
   device: Device;
@@ -10,6 +11,7 @@ interface DeviceItemProps {
 
 const DeviceItem = (props: DeviceItemProps) => {
   const { device } = props;
+  const { currency } = useContext(PreferencesContext);
 
   return (
     <View style={styles.container}>
@@ -27,19 +29,19 @@ const DeviceItem = (props: DeviceItemProps) => {
         <View style={{ display: 'flex', flexDirection: 'row', flex: 1, justifyContent: 'space-around' }}>
           <View style={styles.box}>
             <Text style={styles.amountsTimeText}>Day</Text>
-            <Text style={styles.amountsText}>{device.amounts.day}</Text>
+            <Text style={styles.amountsText}>{`${currency}${device.amounts.day}`}</Text>
           </View>
           <View style={styles.box}>
             <Text style={styles.amountsTimeText}>Week</Text>
-            <Text style={styles.amountsText}>{device.amounts.week}</Text>
+            <Text style={styles.amountsText}>{`${currency}${device.amounts.week}`}</Text>
           </View>
           <View style={styles.box}>
             <Text style={styles.amountsTimeText}>Month</Text>
-            <Text style={styles.amountsText}>{device.amounts.month}</Text>
+            <Text style={styles.amountsText}>{`${currency}${device.amounts.month}`}</Text>
           </View>
           <View style={styles.box}>
             <Text style={styles.amountsTimeText}>Year</Text>
-            <Text style={styles.amountsText}>{device.amounts.year}</Text>
+            <Text style={styles.amountsText}>{`${currency}${device.amounts.year}`}</Text>
           </View>
         </View>
       </View>
