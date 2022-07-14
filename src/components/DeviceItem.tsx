@@ -2,8 +2,8 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { Avatar } from 'react-native-paper';
 import { heightPercentageToDP as hp, widthPercentageToDP as wp } from 'react-native-responsive-screen';
+import Icon from 'react-native-vector-icons/FontAwesome';
 import { Device } from '../types';
-
 interface DeviceItemProps {
   device: Device;
 }
@@ -22,8 +22,7 @@ const DeviceItem = (props: DeviceItemProps) => {
           <Text style={styles.deviceNameText}>{device.name}</Text>
           <Text style={styles.deviceDetailsText}>{device.count} piece</Text>
           <Text style={styles.deviceDetailsText}>{device.watt} W</Text>
-          <Text style={styles.deviceDetailsText}>Edit</Text>
-          {/* <Avatar.Icon icon="pencil" size={wp(4)}/> */}
+          <Icon name='pencil' />
         </View>
         <View style={{ display: 'flex', flexDirection: 'row', flex: 1, justifyContent: 'space-around' }}>
           <View style={styles.box}>
@@ -44,17 +43,6 @@ const DeviceItem = (props: DeviceItemProps) => {
           </View>
         </View>
       </View>
-
-      {/* <View style={styles.amountsContainer}>
-        <View style={styles.amountsFirstSection}>
-          <Text>d:{`\t${device.amounts.day}`}</Text>
-          <Text>w:{`\t${device.amounts.day}`}</Text>
-        </View>
-        <View style={styles.amountsSecondSection}>
-          <Text>m:{`\t${device.amounts.day}`}</Text>
-          <Text>y:{`\t${device.amounts.day}`}</Text>
-        </View>
-      </View> */}
     </View>
   )
 }
@@ -76,7 +64,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   detailsContainer: {
-    //width: '100%'
     flex: 1
   },
   box: {
