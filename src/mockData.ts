@@ -47,3 +47,23 @@ export const deviceList : Device[] = [
     }
   }
 ];
+
+export const iconList = [
+  "cog",
+  "phone",
+  "fridge",
+  "monitor",
+  "desktop-tower",
+  "lightbulb",
+  "air-humidifier",
+  "air-conditioner",
+  "battery-medium",
+  "blender",
+  "cctv",
+  "ceiling-light",
+  "ceiling-fan",
+  "cellphone",
+  "coffee-maker",
+  "controller-classic",
+ "desk-lamp"
+]

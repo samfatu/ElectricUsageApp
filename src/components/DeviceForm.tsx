@@ -1,8 +1,9 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { ScrollView, StyleSheet, Text, View } from 'react-native';
-import { ActivityIndicator, Avatar, Button, IconButton, TextInput } from 'react-native-paper';
+import { FlatList, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { ActivityIndicator, Avatar, Button, IconButton, Modal, Portal, TextInput } from 'react-native-paper';
 import { heightPercentageToDP as hp, widthPercentageToDP as wp } from 'react-native-responsive-screen';
 import { PreferencesContext } from '../context/PreferencesContext';
+import { iconList } from '../mockData';
 import { devicesStorage, ModalMode } from '../screens/Calculate';
 import { Device } from '../types';
 import { calculateDevice } from '../utils/calculator';
@@ -20,7 +21,7 @@ const DeviceForm = (props: DeviceFormProps) => {
   const [showHelperText, setShowHelperText] = useState<boolean>(false);
   const { device, handleClose, mode, index } = props;
   const { currency, lang, price } = useContext(PreferencesContext);
-
+  const [iconModalOpened, setIconModalOpened] = useState<boolean>(false);
 
   useEffect(() => {
     setEditedDevice(device);
@@ -32,6 +33,9 @@ const DeviceForm = (props: DeviceFormProps) => {
       setEditedDevice({...editedDevice, amounts: calculatedValues});
     }
   }, [editedDevice?.count, editedDevice?.watt, editedDevice?.dailyHours, editedDevice?.weeklyDays]);
+
+  const showModal = () => setIconModalOpened(true);
+  const hideModal = () => setIconModalOpened(false);
 
   const handleSaveDevice = () => {
     if (validateInputs()) {
@@ -88,6 +92,36 @@ const DeviceForm = (props: DeviceFormProps) => {
 
   return (
     <ScrollView style={styles.container}>
+      <Portal>
+        <Modal visible={iconModalOpened} onDismiss={hideModal} contentContainerStyle={styles.modalContainer}>
+        <View style={styles.headerSection}>
+          <Text style={styles.headerText}>Pick an icon</Text>
+          <IconButton icon="close" size={14} onPress={hideModal} />
+        </View>
+          <FlatList
+            keyExtractor={(item) => item}
+            data={iconList}
+            numColumns={4}
+            columnWrapperStyle={{
+              flex: 1,
+              justifyContent: 'space-around'
+            }}
+            renderItem={(item) => (
+              <Pressable
+                style={{ marginVertical: hp(1) }}
+                onPress={() => {
+                  let device = editedDevice;
+                  device!.iconName = item.item;
+                  setEditedDevice(device);
+                  hideModal();
+                }}
+              >
+                <Avatar.Icon icon={item.item} />
+              </Pressable>
+            )}
+          />
+        </Modal>
+      </Portal>
       <View style={styles.headerSection}>
         <Text style={styles.headerText}>Edit Device</Text>
         <IconButton icon="close" size={14} onPress={handleClose} />
@@ -96,7 +130,9 @@ const DeviceForm = (props: DeviceFormProps) => {
       {editedDevice ? (
         <>
           <View style={styles.nameAndAvatarSection}>
-            <Avatar.Icon icon={editedDevice.iconName} size={40} style={styles.avatar} />
+            <Pressable onPress={showModal}>
+              <Avatar.Icon icon={editedDevice.iconName} size={40} style={styles.avatar} />
+            </Pressable>
             <TextInput
               key="device-name"
               label="Device Name"
@@ -172,6 +208,15 @@ export default DeviceForm
 const styles = StyleSheet.create({
   container: {
     width: '100%',
+  },
+  modalContainer: {
+    backgroundColor: 'white',
+    //height: hp(75),
+    height: hp(50),
+    margin: wp(4),
+    borderRadius: wp(2),
+    paddingHorizontal: wp(2),
+    paddingVertical: hp(2),
   },
   headerSection: {
     display: 'flex',
