@@ -61,13 +61,13 @@ const Calculate = () => {
 
   return (
     <View style={styles.container}>
-        <Portal>
-          <Modal visible={editModalOpened} onDismiss={hideModal} contentContainerStyle={styles.modalContainer}>
-            <KeyboardAvoidingView behavior='height' enabled>
-              {selectedDevice && <DeviceForm device={selectedDevice} handleClose={hideModal} mode={modalMode} index={editIndex} />}
-            </KeyboardAvoidingView>
-          </Modal>
-        </Portal>
+      <Portal>
+        <Modal visible={editModalOpened} onDismiss={hideModal} contentContainerStyle={styles.modalContainer}>
+          <KeyboardAvoidingView behavior='height' enabled>
+            {selectedDevice && <DeviceForm device={selectedDevice} handleClose={hideModal} mode={modalMode} index={editIndex} />}
+          </KeyboardAvoidingView>
+        </Modal>
+      </Portal>
       <View style={styles.listContainer}>
         {devices.length > 0 ? (
           <FlatList
