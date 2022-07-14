@@ -26,3 +26,20 @@ export class TotalAmount {
     public year: number
   ) {}
 }
+
+export class DeviceListCalculateResult {
+  constructor(
+    public totalKWMonth: number,
+    public totalAmountMonth: number,
+    public totalKWYear: number,
+    public totalAmountYear: number,
+  ) {}
+}
+
+export class Preferences {
+  constructor(
+    public currency: string,
+    public price: number,
+    public lang: string,
+  ) {}
+}

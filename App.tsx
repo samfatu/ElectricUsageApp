@@ -2,6 +2,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import React from 'react';
 import { DefaultTheme, Provider as PaperProvider } from 'react-native-paper';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { PreferencesProvider } from './src/context/PreferencesContext';
 import StackNav from './src/screens/nav/StackNav';
 
 const theme = {
@@ -20,9 +21,11 @@ const App = () => {
   return (
     <PaperProvider theme={theme}>
       <SafeAreaProvider>
-        <NavigationContainer>
-            <StackNav />
-        </NavigationContainer>
+        <PreferencesProvider>
+          <NavigationContainer>
+              <StackNav />
+          </NavigationContainer>
+        </PreferencesProvider>
       </SafeAreaProvider>
     </PaperProvider>
   );
