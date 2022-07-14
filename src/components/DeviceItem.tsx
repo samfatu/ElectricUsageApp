@@ -5,6 +5,7 @@ import { heightPercentageToDP as hp, widthPercentageToDP as wp } from 'react-nat
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { PreferencesContext } from '../context/PreferencesContext';
 import { Device } from '../types';
+
 interface DeviceItemProps {
   device: Device;
 }
