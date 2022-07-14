@@ -1,23 +1,49 @@
-import React from 'react'
-import { FlatList, StyleSheet, Text, View } from 'react-native'
-import { Button } from 'react-native-paper'
-import { heightPercentageToDP as hp, widthPercentageToDP as wp } from 'react-native-responsive-screen'
-import DeviceItem from '../components/DeviceItem'
-import { deviceList } from '../mockData'
+import React, { useState } from 'react';
+import { FlatList, KeyboardAvoidingView, Pressable, StyleSheet, Text, View } from 'react-native';
+import { Button, Modal, Portal } from 'react-native-paper';
+import { heightPercentageToDP as hp, widthPercentageToDP as wp } from 'react-native-responsive-screen';
+import uuid from 'react-native-uuid';
+import DeviceForm from '../components/DeviceForm';
+import DeviceItem from '../components/DeviceItem';
+import { deviceList } from '../mockData';
+import { Device, TotalAmount } from '../types';
 
 const Calculate = () => {
+  const [editModalOpened, setEditModalOpened] = useState<boolean>(false);
+  const [selectedDevice, setSelectedDevice] = useState<Device | null>(null);
+
+  const showModal = () => setEditModalOpened(true);
+  const hideModal = () => setEditModalOpened(false);
+
+  const handleClickDevice = (index: number) => {
+    setSelectedDevice(deviceList[index]);
+    showModal();
+  }
+
+  const handleAddDevice = () => {
+    let device = new Device(uuid.v4().toString(), "", "", 0, 1, 0, 0, new TotalAmount(0, 0, 0, 0));
+    setSelectedDevice(device);
+    showModal();
+  }
+
   return (
     <View style={styles.container}>
+        <Portal>
+          <Modal visible={editModalOpened} onDismiss={hideModal} contentContainerStyle={styles.modalContainer}>
+            <KeyboardAvoidingView behavior='height' enabled>
+              {selectedDevice && <DeviceForm device={selectedDevice} handleClose={hideModal} />}
+            </KeyboardAvoidingView>
+          </Modal>
+        </Portal>
       <View style={styles.listContainer}>
         <FlatList
           data={deviceList}
-          renderItem={(device) => <DeviceItem device={device.item} />}
-          style={styles.list}
+          renderItem={(device) =>
+            <Pressable onPress={() => handleClickDevice(device.index)}>
+              <DeviceItem device={device.item} />
+            </Pressable>}
           showsVerticalScrollIndicator={false}
         />
-      </View>
-      <View style={styles.infoBox}>
-        <Text style={styles.infoText}><Text>*</Text>Click on an item to edit its numbers</Text>
       </View>
       <View style={styles.reportBoxContainer}>
         <View style={styles.reportBox}>
@@ -27,7 +53,7 @@ const Calculate = () => {
           <Text><Text style={{ color: 'red' }}>120 kW</Text>{"\t\t"}<Text style={{ color: 'red' }}>395.8 TL</Text></Text>
         </View>
         <View>
-          <Button style={styles.addDeviceButton} mode="contained" icon="plus">Add Device</Button>
+          <Button mode="contained" icon="plus" onPress={handleAddDevice}>Add Device</Button>
         </View>
       </View>
     </View>
@@ -41,22 +67,19 @@ const styles = StyleSheet.create({
     width: wp(100),
     height: hp(90),
   },
+  modalContainer: {
+    backgroundColor: 'white',
+    //height: hp(75),
+    margin: wp(4),
+    borderRadius: wp(2),
+    paddingHorizontal: wp(2),
+    paddingVertical: hp(2),
+  },
   listContainer: {
     width: wp(100),
-    height: hp(76),
+    height: hp(78),
     paddingHorizontal: wp(4),
     paddingTop: hp(1)
-  },
-  list: {
-    //backgroundColor: 'cyan'
-  },
-  infoBox: {
-    width: wp(100),
-    height: hp(2),
-    paddingHorizontal: wp(4),
-  },
-  infoText: {
-    fontSize: 12
   },
   reportBoxContainer: {
     width: wp(100),
@@ -72,11 +95,4 @@ const styles = StyleSheet.create({
   reportBox: {
 
   },
-  addDeviceButton: {
-    //flex: 1,
-    //display: 'flex',
-    //alignSelf: 'center',
-    //position: 'absolute',
-    //bottom: hp(2)
-  }
 })
