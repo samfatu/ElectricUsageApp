@@ -3,38 +3,66 @@ import { ScrollView, StyleSheet, Text, View } from 'react-native';
 import { ActivityIndicator, Avatar, Button, IconButton, TextInput } from 'react-native-paper';
 import { heightPercentageToDP as hp, widthPercentageToDP as wp } from 'react-native-responsive-screen';
 import { PreferencesContext } from '../context/PreferencesContext';
+import { devicesStorage, ModalMode } from '../screens/Calculate';
 import { Device } from '../types';
+import { calculateDevice } from '../utils/calculator';
 
 interface DeviceFormProps {
   device: Device;
   handleClose: () => void;
+  mode: ModalMode;
+  index?: number;
 }
 
 const DeviceForm = (props: DeviceFormProps) => {
   const [editedDevice, setEditedDevice] = useState<Device | null>(null);
   const [helperText, setHelperText] = useState<string>("");
   const [showHelperText, setShowHelperText] = useState<boolean>(false);
-  const { device, handleClose } = props;
+  const { device, handleClose, mode, index } = props;
   const { currency, lang, price } = useContext(PreferencesContext);
 
+
   useEffect(() => {
-    setEditedDevice(device)
+    setEditedDevice(device);
   }, [props]);
+
+  useEffect(() => {
+    if (editedDevice) {
+      let calculatedValues = calculateDevice(editedDevice, price);
+      setEditedDevice({...editedDevice, amounts: calculatedValues});
+    }
+  }, [editedDevice?.count, editedDevice?.watt, editedDevice?.dailyHours, editedDevice?.weeklyDays]);
 
   const handleSaveDevice = () => {
     if (validateInputs()) {
       setHelperText("");
       setShowHelperText(false);
       // TODO:SAVE TO THE STATE MANAGER
+      saveToStorage();
       // close
       handleClose();
+    }
+  }
+
+  const saveToStorage = () => {
+    if (devicesStorage.getString('devices') && editedDevice) {
+      let deviceList : Device[] = JSON.parse(devicesStorage.getString('devices') as string);
+
+      // To edit
+      if (mode === "edit" && (index !== null && index !== undefined)) {
+        deviceList[index] = editedDevice;
+        devicesStorage.set('devices', JSON.stringify(deviceList));
+      } else { // To create
+        deviceList.push(editedDevice);
+        devicesStorage.set('devices', JSON.stringify(deviceList));
+      }
     }
   }
 
   const validateInputs = () => {
     if (editedDevice) {
       // TODO: check for auto focus to related field
-      if (editedDevice.dailyHours > 24 || editedDevice.dailyHours < 0) {
+      if (editedDevice.dailyHours > 24 || editedDevice.dailyHours < 0) {
         setHelperText("Daily hours must be between 0 and 24");
         setShowHelperText(true);
         return false;

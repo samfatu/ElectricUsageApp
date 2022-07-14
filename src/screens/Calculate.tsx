@@ -1,27 +1,62 @@
-import React, { useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { FlatList, KeyboardAvoidingView, Pressable, StyleSheet, Text, View } from 'react-native';
+import { MMKV } from 'react-native-mmkv';
 import { Button, Modal, Portal } from 'react-native-paper';
 import { heightPercentageToDP as hp, widthPercentageToDP as wp } from 'react-native-responsive-screen';
 import uuid from 'react-native-uuid';
 import DeviceForm from '../components/DeviceForm';
 import DeviceItem from '../components/DeviceItem';
+import { PreferencesContext } from '../context/PreferencesContext';
 import { deviceList } from '../mockData';
-import { Device, TotalAmount } from '../types';
+import { Device, DeviceListCalculateResult, TotalAmount } from '../types';
+import { calculateTotal } from '../utils/calculator';
+
+export const devicesStorage = new MMKV({
+  id: 'devices',
+  encryptionKey: 'temp'
+});
+
+export type ModalMode = "edit" | "add";
 
 const Calculate = () => {
+  const [devices, setDevices] = useState<Device[]>([]);
   const [editModalOpened, setEditModalOpened] = useState<boolean>(false);
+  const [modalMode, setModalMode] = useState<ModalMode>("add");
+  const [editIndex, setEditIndex] = useState<number>(0);
   const [selectedDevice, setSelectedDevice] = useState<Device | null>(null);
+  const [deviceListTotal, setDeviceListTotal] = useState<DeviceListCalculateResult | null>(null);
+  const { currency, lang, price } = useContext(PreferencesContext);
+
+  useEffect(() => {
+    let storedDevices = devicesStorage.getString('devices');
+
+    if (storedDevices) {
+      console.log('StoredDevices found!');
+      setDevices(JSON.parse(storedDevices));
+    } else {
+      // TODO: change deviceList to devices
+      devicesStorage.set('devices', JSON.stringify(deviceList));
+    }
+  }, [editModalOpened]);
+
+  useEffect(() => {
+    let calculatedValue = calculateTotal(devices);
+    setDeviceListTotal(calculatedValue);
+  }, [devices]);
 
   const showModal = () => setEditModalOpened(true);
   const hideModal = () => setEditModalOpened(false);
 
   const handleClickDevice = (index: number) => {
-    setSelectedDevice(deviceList[index]);
+    setModalMode("edit");
+    setEditIndex(index);
+    setSelectedDevice(devices[index]);
     showModal();
   }
 
   const handleAddDevice = () => {
-    let device = new Device(uuid.v4().toString(), "", "", 0, 1, 0, 0, new TotalAmount(0, 0, 0, 0));
+    setModalMode("add");
+    let device = new Device(uuid.v4().toString(), "", "alpha-d-circle", 0, 0, 0, 0, new TotalAmount(0, 0, 0, 0));
     setSelectedDevice(device);
     showModal();
   }
@@ -31,13 +66,13 @@ const Calculate = () => {
         <Portal>
           <Modal visible={editModalOpened} onDismiss={hideModal} contentContainerStyle={styles.modalContainer}>
             <KeyboardAvoidingView behavior='height' enabled>
-              {selectedDevice && <DeviceForm device={selectedDevice} handleClose={hideModal} />}
+              {selectedDevice && <DeviceForm device={selectedDevice} handleClose={hideModal} mode={modalMode} index={editIndex} />}
             </KeyboardAvoidingView>
           </Modal>
         </Portal>
       <View style={styles.listContainer}>
         <FlatList
-          data={deviceList}
+          data={devices}
           renderItem={(device) =>
             <Pressable onPress={() => handleClickDevice(device.index)}>
               <DeviceItem device={device.item} />
@@ -46,12 +81,22 @@ const Calculate = () => {
         />
       </View>
       <View style={styles.reportBoxContainer}>
-        <View style={styles.reportBox}>
-          <Text>Total for month:</Text>
-          <Text><Text style={{ color: 'red' }}>10 kW</Text>{"\t\t"}<Text style={{ color: 'red' }}>34.12 TL</Text></Text>
-          <Text>Total for year:</Text>
-          <Text><Text style={{ color: 'red' }}>120 kW</Text>{"\t\t"}<Text style={{ color: 'red' }}>395.8 TL</Text></Text>
-        </View>
+          {deviceListTotal && (
+            <View style={styles.reportBox}>
+                <Text>Total for month:</Text>
+                <Text>
+                  <Text style={{ color: 'red' }}>{deviceListTotal.totalKWMonth} kW</Text>
+                  {"\t\t"}
+                  <Text style={{ color: 'red' }}>{`${currency}${deviceListTotal.totalAmountMonth}`}</Text>
+                </Text>
+                <Text>Total for year:</Text>
+                <Text>
+                  <Text style={{ color: 'red' }}>{deviceListTotal.totalKWYear} kW</Text>
+                  {"\t\t"}
+                  <Text style={{ color: 'red' }}>{`${currency}${deviceListTotal.totalAmountYear}`}</Text>
+                </Text>
+            </View>
+          )}
         <View>
           <Button mode="contained" icon="plus" onPress={handleAddDevice}>Add Device</Button>
         </View>
