@@ -37,9 +37,7 @@ const DeviceForm = (props: DeviceFormProps) => {
     if (validateInputs()) {
       setHelperText("");
       setShowHelperText(false);
-      // TODO:SAVE TO THE STATE MANAGER
       saveToStorage();
-      // close
       handleClose();
     }
   }
@@ -56,6 +54,18 @@ const DeviceForm = (props: DeviceFormProps) => {
         deviceList.push(editedDevice);
         devicesStorage.set('devices', JSON.stringify(deviceList));
       }
+    }
+  }
+
+  const handleDeleteDevice = () => {
+    if (devicesStorage.getString('devices')) {
+      let deviceList : Device[] = JSON.parse(devicesStorage.getString('devices') as string);
+
+      if (index !== null && index !== undefined) {
+        deviceList.splice(index, 1);
+        devicesStorage.set('devices', JSON.stringify(deviceList));
+      }
+      handleClose();
     }
   }
 
@@ -146,8 +156,9 @@ const DeviceForm = (props: DeviceFormProps) => {
             </View>
           )}
 
-          <Button mode="contained" icon="content-save" style={styles.saveButton} onPress={handleSaveDevice}>Save Device</Button>
 
+          <Button mode="contained" icon="content-save" style={styles.saveButton} onPress={handleSaveDevice}>Save Device</Button>
+          {mode === "edit" && <Button mode="contained" icon="delete" color='#D33F49' style={styles.saveButton} onPress={handleDeleteDevice}>Delete Device</Button>}
         </>
       ) : (
         <ActivityIndicator animating={true} />
@@ -202,7 +213,7 @@ const styles = StyleSheet.create({
   },
   helperText: {
     fontSize: 12,
-    color: 'red'
+    color: '#D33F49'
   },
   saveButton: {
     marginTop: hp(1)

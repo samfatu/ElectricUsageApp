@@ -7,7 +7,6 @@ import uuid from 'react-native-uuid';
 import DeviceForm from '../components/DeviceForm';
 import DeviceItem from '../components/DeviceItem';
 import { PreferencesContext } from '../context/PreferencesContext';
-import { deviceList } from '../mockData';
 import { Device, DeviceListCalculateResult, TotalAmount } from '../types';
 import { calculateTotal } from '../utils/calculator';
 
@@ -25,7 +24,7 @@ const Calculate = () => {
   const [editIndex, setEditIndex] = useState<number>(0);
   const [selectedDevice, setSelectedDevice] = useState<Device | null>(null);
   const [deviceListTotal, setDeviceListTotal] = useState<DeviceListCalculateResult | null>(null);
-  const { currency, lang, price } = useContext(PreferencesContext);
+  const { currency } = useContext(PreferencesContext);
 
   useEffect(() => {
     let storedDevices = devicesStorage.getString('devices');
@@ -34,8 +33,7 @@ const Calculate = () => {
       console.log('StoredDevices found!');
       setDevices(JSON.parse(storedDevices));
     } else {
-      // TODO: change deviceList to devices
-      devicesStorage.set('devices', JSON.stringify(deviceList));
+      devicesStorage.set('devices', JSON.stringify(devices));
     }
   }, [editModalOpened]);
 
@@ -71,7 +69,8 @@ const Calculate = () => {
           </Modal>
         </Portal>
       <View style={styles.listContainer}>
-        <FlatList
+        {devices.length > 0 ? (
+          <FlatList
           data={devices}
           renderItem={(device) =>
             <Pressable onPress={() => handleClickDevice(device.index)}>
@@ -79,21 +78,23 @@ const Calculate = () => {
             </Pressable>}
           showsVerticalScrollIndicator={false}
         />
+        ) :
+        <Text>There is no device to show</Text>}
       </View>
       <View style={styles.reportBoxContainer}>
           {deviceListTotal && (
             <View style={styles.reportBox}>
                 <Text>Total for month:</Text>
                 <Text>
-                  <Text style={{ color: 'red' }}>{deviceListTotal.totalKWMonth} kW</Text>
+                  <Text style={styles.reportResultText}>{deviceListTotal.totalKWMonth} kW</Text>
                   {"\t\t"}
-                  <Text style={{ color: 'red' }}>{`${currency}${deviceListTotal.totalAmountMonth}`}</Text>
+                  <Text style={styles.reportResultText}>{`${currency}${deviceListTotal.totalAmountMonth}`}</Text>
                 </Text>
                 <Text>Total for year:</Text>
                 <Text>
-                  <Text style={{ color: 'red' }}>{deviceListTotal.totalKWYear} kW</Text>
+                  <Text style={styles.reportResultText}>{deviceListTotal.totalKWYear} kW</Text>
                   {"\t\t"}
-                  <Text style={{ color: 'red' }}>{`${currency}${deviceListTotal.totalAmountYear}`}</Text>
+                  <Text style={styles.reportResultText}>{`${currency}${deviceListTotal.totalAmountYear}`}</Text>
                 </Text>
             </View>
           )}
@@ -140,4 +141,7 @@ const styles = StyleSheet.create({
   reportBox: {
 
   },
+  reportResultText: {
+    color: '#D33F49'
+  }
 })
