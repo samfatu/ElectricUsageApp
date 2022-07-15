@@ -22,7 +22,6 @@ const PreferencesProvider = ({ children }: { children: ReactNode }) => {
     let storedPreferences = preferencesStorage.getString('preferences');
 
     if (storedPreferences) {
-      console.log('StoredPreferences found!');
       setPreferences(JSON.parse(storedPreferences));
     } else {
       preferencesStorage.set('preferences', JSON.stringify(preferences));

@@ -30,7 +30,6 @@ const Calculate = () => {
     let storedDevices = devicesStorage.getString('devices');
 
     if (storedDevices) {
-      console.log('StoredDevices found!');
       setDevices(JSON.parse(storedDevices));
     } else {
       devicesStorage.set('devices', JSON.stringify(devices));
@@ -115,7 +114,6 @@ const styles = StyleSheet.create({
   },
   modalContainer: {
     backgroundColor: 'white',
-    //height: hp(75),
     margin: wp(4),
     borderRadius: wp(2),
     paddingHorizontal: wp(2),

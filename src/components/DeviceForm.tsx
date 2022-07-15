@@ -2,8 +2,8 @@ import React, { useContext, useEffect, useState } from 'react';
 import { FlatList, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { ActivityIndicator, Avatar, Button, IconButton, Modal, Portal, TextInput } from 'react-native-paper';
 import { heightPercentageToDP as hp, widthPercentageToDP as wp } from 'react-native-responsive-screen';
+import { iconList } from '../constants';
 import { PreferencesContext } from '../context/PreferencesContext';
-import { iconList } from '../mockData';
 import { devicesStorage, ModalMode } from '../screens/Calculate';
 import { Device } from '../types';
 import { calculateDevice } from '../utils/calculator';
@@ -16,7 +16,7 @@ interface DeviceFormProps {
 }
 
 const DeviceForm = (props: DeviceFormProps) => {
-  const [editedDevice, setEditedDevice] = useState<Device | null>(null);
+  const [editedDevice, setEditedDevice] = useState<Device | null>(null);
   const [helperText, setHelperText] = useState<string>("");
   const [showHelperText, setShowHelperText] = useState<boolean>(false);
   const { device, handleClose, mode, index } = props;
@@ -126,7 +126,6 @@ const DeviceForm = (props: DeviceFormProps) => {
         <Text style={styles.headerText}>Edit Device</Text>
         <IconButton icon="close" size={14} onPress={handleClose} />
       </View>
-
       {editedDevice ? (
         <>
           <View style={styles.nameAndAvatarSection}>
@@ -211,7 +210,6 @@ const styles = StyleSheet.create({
   },
   modalContainer: {
     backgroundColor: 'white',
-    //height: hp(75),
     height: hp(50),
     margin: wp(4),
     borderRadius: wp(2),
