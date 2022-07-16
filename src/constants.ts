@@ -20,14 +20,16 @@ export const iconList = [
 ];
 
 export const languageList = [
-  "English",
-  "Español",
-  "Français",
-  "Português",
-  "Deutsch",
-  "中國人", // Chinese
-  "日本", // Japanese
-  "한국인", // Korean
+  { symbol: 'en-US', name: 'English' },
+  { symbol: 'es-ES', name: 'Español' },
+  { symbol: 'fr-FR', name: 'Français' },
+  { symbol: 'pt-PT', name: 'Português' },
+  { symbol: 'de-DE', name: 'Deutsch' },
+  { symbol: 'tr-TR', name: 'Türkçe' },
+  { symbol: 'zh-CN', name: '中國人' },
+  { symbol: 'ja-JP', name: '日本' },
+  { symbol: 'ko-KR', name: '한국인' },
+  { symbol: 'ar-SA', name: 'عربي' },
 ];
 
 export const currencySymbolList = [
