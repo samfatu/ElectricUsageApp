@@ -8,9 +8,10 @@ export const preferencesStorage = new MMKV({
 });
 
 const defaultValues: Preferences = {
-  currency: '₺',
-  price: 1.25,
-  lang: 'tr'
+  currency: '$',
+  price: 1,
+  language: 'en-US',
+  changePreferences: () => {}
 }
 
 const PreferencesContext = createContext(defaultValues);
@@ -19,12 +20,16 @@ const PreferencesProvider = ({ children }: { children: ReactNode }) => {
   const [preferences, setPreferences] = useState<Preferences>(defaultValues);
 
   useEffect(() => {
-    let storedPreferences = preferencesStorage.getString('preferences');
+    let storedCurrency = preferencesStorage.getString('currency');
+    let storedLanguage = preferencesStorage.getString('language');
+    let storedPrice = preferencesStorage.getNumber('price');
 
-    if (storedPreferences) {
-      setPreferences(JSON.parse(storedPreferences));
+    if (storedCurrency && storedLanguage && storedPrice) {
+      setPreferences({ currency: storedCurrency, language: storedLanguage, price: storedPrice, changePreferences: setPreferences });
     } else {
-      preferencesStorage.set('preferences', JSON.stringify(preferences));
+      preferencesStorage.set('currency', preferences.currency);
+      preferencesStorage.set('language', preferences.language);
+      preferencesStorage.set('price', preferences.price);
     }
   }, [])
 

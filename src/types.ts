@@ -40,6 +40,7 @@ export class Preferences {
   constructor(
     public currency: string,
     public price: number,
-    public lang: string,
+    public language: string,
+    public changePreferences: Function,
   ) {}
 }
