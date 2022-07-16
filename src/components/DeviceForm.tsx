@@ -20,7 +20,7 @@ const DeviceForm = (props: DeviceFormProps) => {
   const [helperText, setHelperText] = useState<string>("");
   const [showHelperText, setShowHelperText] = useState<boolean>(false);
   const { device, handleClose, mode, index } = props;
-  const { currency, lang, price } = useContext(PreferencesContext);
+  const { currency , price } = useContext(PreferencesContext);
   const [iconModalOpened, setIconModalOpened] = useState<boolean>(false);
 
   useEffect(() => {

@@ -3,14 +3,17 @@ import React from 'react';
 import { Pressable, StyleSheet, View } from 'react-native';
 import { Avatar, Text } from 'react-native-paper';
 import { heightPercentageToDP as hp, widthPercentageToDP as wp } from 'react-native-responsive-screen';
+import useLocales from '../hooks/useLocales';
 
 const Home = (props: NativeStackHeaderProps) => {
   const { navigation } = props;
+  const { translate, changeLang, language } = useLocales();
 
+  console.log('Language from home:', language)
   return (
     <View style={styles.container}>
       <View style={styles.box}>
-        <Text style={styles.welcomeText}>Welcome!</Text>
+        <Text style={styles.welcomeText}>{translate('welcome')}</Text>
         <Text style={styles.descriptionText}>Description</Text>
       </View>
 
@@ -40,7 +43,6 @@ const Home = (props: NativeStackHeaderProps) => {
           </View>
         </View>
       </Pressable>
-
     </View>
   )
 }
