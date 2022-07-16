@@ -7,21 +7,20 @@ import useLocales from '../hooks/useLocales';
 
 const Home = (props: NativeStackHeaderProps) => {
   const { navigation } = props;
-  const { translate, changeLang, language } = useLocales();
+  const { translate } = useLocales();
 
-  console.log('Language from home:', language)
   return (
     <View style={styles.container}>
       <View style={styles.box}>
         <Text style={styles.welcomeText}>{translate('welcome')}</Text>
-        <Text style={styles.descriptionText}>Description</Text>
+        <Text style={styles.descriptionText}>{translate('description')}</Text>
       </View>
 
       <Pressable onPress={() => navigation.navigate('Calculate')} >
         <View style={styles.box}>
           <View style={styles.boxContainer}>
             <Avatar.Icon icon="calculator" size={40} />
-            <Text style={styles.boxTitle}>Calculate Electric Usage of Device</Text>
+            <Text style={styles.boxTitle}>{translate('calculate-menu')}</Text>
           </View>
         </View>
       </Pressable>
@@ -30,7 +29,7 @@ const Home = (props: NativeStackHeaderProps) => {
         <View style={styles.box}>
           <View style={styles.boxContainer}>
             <Avatar.Icon icon="earth" size={40} />
-            <Text style={styles.boxTitle}>Change Region Settings</Text>
+            <Text style={styles.boxTitle}>{translate('preferences-menu')}</Text>
           </View>
         </View>
       </Pressable>
@@ -39,7 +38,7 @@ const Home = (props: NativeStackHeaderProps) => {
         <View style={styles.box}>
           <View style={styles.boxContainer}>
             <Avatar.Icon icon="information" size={40} />
-            <Text style={styles.boxTitle}>Information</Text>
+            <Text style={styles.boxTitle}>{translate('information-menu')}</Text>
           </View>
         </View>
       </Pressable>
@@ -56,7 +55,6 @@ const styles = StyleSheet.create({
     display: 'flex',
     alignItems: 'center',
     paddingTop: hp(5)
-    //justifyContent: 'space-evenly',
   },
   box: {
     width: wp(90),
@@ -92,6 +90,5 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     color: '#505050',
     fontSize: 16,
-    //fontWeight: 'bold',
   }
 })

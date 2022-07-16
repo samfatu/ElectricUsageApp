@@ -7,7 +7,6 @@ export default function useLocales() {
   const { language: storedLanguge, price, currency, changePreferences } = useContext(PreferencesContext);
 
   const handleChangeLang = (lang: string) => {
-    console.log('HELLO FORM CHANGELANG: ', lang)
     I18n.locale = lang;
     changePreferences({ price, currency, language: lang, changePreferences });
   }

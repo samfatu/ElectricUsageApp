@@ -15,9 +15,8 @@ const Settings = () => {
   const [selectionType, setSelectionType] = useState<SelectionType>("language");
   const [editedPreference, setEditedPreference] = useState<Preferences>({ language, currency, price, changePreferences });
   const [visible, setVisible] = useState(false);
-  const { changeLang, language : lngFromLocales } = useLocales();
-  console.log('Context Lang: ', language);
-  console.log('localesLang: ', lngFromLocales, '\n');
+  const { changeLang, translate } = useLocales();
+
   const onToggleSnackBar = () => setVisible(!visible);
   const onDismissSnackBar = () => setVisible(false);
 
@@ -98,22 +97,22 @@ const Settings = () => {
         onDismiss={onDismissSnackBar}
         duration={2500}
       >
-        Preferences successfully setted
+        {translate('preferences-success')}
       </Snackbar>
       <View style={styles.section}>
-        <Text>Select your language</Text>
+        <Text>{translate('choose-language')}</Text>
         <Pressable style={styles.pickerContainer} onPress={openLanguageList}>
           <Text>{languageList.find(lang => editedPreference.language === lang.symbol)?.name}</Text>
         </Pressable>
       </View>
       <View style={styles.section}>
-        <Text>Select your currency</Text>
+        <Text>{translate('choose-currency')}</Text>
         <Pressable style={styles.pickerContainer} onPress={openCurrencyList}>
           <Text>{editedPreference.currency}</Text>
         </Pressable>
       </View>
       <View style={styles.section}>
-        <Text>Enter price per kWh in your country</Text>
+        <Text>{translate('enter-price')}</Text>
         <View style={{...styles.pickerContainer, height: 'auto', padding: 0 }}>
           <TextInput
             style={styles.priceInput}
@@ -123,7 +122,7 @@ const Settings = () => {
           />
         </View>
       </View>
-      <Button mode='contained' onPress={savePreferences}>Save Preferences</Button>
+      <Button mode='contained' onPress={savePreferences}>{translate('save-preferences')}</Button>
     </View>
   )
 }

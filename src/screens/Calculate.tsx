@@ -7,6 +7,7 @@ import uuid from 'react-native-uuid';
 import DeviceForm from '../components/DeviceForm';
 import DeviceItem from '../components/DeviceItem';
 import { PreferencesContext } from '../context/PreferencesContext';
+import useLocales from '../hooks/useLocales';
 import { Device, DeviceListCalculateResult, TotalAmount } from '../types';
 import { calculateTotal } from '../utils/calculator';
 
@@ -25,6 +26,7 @@ const Calculate = () => {
   const [selectedDevice, setSelectedDevice] = useState<Device | null>(null);
   const [deviceListTotal, setDeviceListTotal] = useState<DeviceListCalculateResult | null>(null);
   const { currency } = useContext(PreferencesContext);
+  const { translate } = useLocales();
 
   useEffect(() => {
     let storedDevices = devicesStorage.getString('devices');
@@ -78,18 +80,18 @@ const Calculate = () => {
           showsVerticalScrollIndicator={false}
         />
         ) :
-        <Text>There is no device to show</Text>}
+        <Text>{translate('no-device')}</Text>}
       </View>
       <View style={styles.reportBoxContainer}>
           {deviceListTotal && (
             <View style={styles.reportBox}>
-                <Text>Total for month:</Text>
+                <Text>{translate('monthly-total')}</Text>
                 <Text>
                   <Text style={styles.reportResultText}>{deviceListTotal.totalKWMonth} kW</Text>
                   {"\t\t"}
                   <Text style={styles.reportResultText}>{`${currency}${deviceListTotal.totalAmountMonth}`}</Text>
                 </Text>
-                <Text>Total for year:</Text>
+                <Text>{translate('annual-total')}</Text>
                 <Text>
                   <Text style={styles.reportResultText}>{deviceListTotal.totalKWYear} kW</Text>
                   {"\t\t"}

@@ -4,6 +4,7 @@ import { Avatar } from 'react-native-paper';
 import { heightPercentageToDP as hp, widthPercentageToDP as wp } from 'react-native-responsive-screen';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { PreferencesContext } from '../context/PreferencesContext';
+import useLocales from '../hooks/useLocales';
 import { Device } from '../types';
 
 interface DeviceItemProps {
@@ -13,6 +14,7 @@ interface DeviceItemProps {
 const DeviceItem = (props: DeviceItemProps) => {
   const { device } = props;
   const { currency } = useContext(PreferencesContext);
+  const { translate } = useLocales();
 
   return (
     <View style={styles.container}>
@@ -23,25 +25,25 @@ const DeviceItem = (props: DeviceItemProps) => {
       <View style={styles.detailsContainer}>
         <View style={styles.summaryContainer}>
           <Text style={styles.deviceNameText}>{device.name}</Text>
-          <Text style={styles.deviceDetailsText}>{device.count} piece</Text>
-          <Text style={styles.deviceDetailsText}>{device.watt} W</Text>
+          <Text style={styles.deviceDetailsText}>{device.count} {translate('piece-l')}</Text>
+          <Text style={styles.deviceDetailsText}>{device.watt} {translate('watt')}</Text>
           <Icon name='pencil' />
         </View>
         <View style={{ display: 'flex', flexDirection: 'row', flex: 1, justifyContent: 'space-around' }}>
           <View style={styles.box}>
-            <Text style={styles.amountsTimeText}>Day</Text>
+            <Text style={styles.amountsTimeText}>{translate('day')}</Text>
             <Text style={styles.amountsText}>{`${currency}${device.amounts.day}`}</Text>
           </View>
           <View style={styles.box}>
-            <Text style={styles.amountsTimeText}>Week</Text>
+            <Text style={styles.amountsTimeText}>{translate('week')}</Text>
             <Text style={styles.amountsText}>{`${currency}${device.amounts.week}`}</Text>
           </View>
           <View style={styles.box}>
-            <Text style={styles.amountsTimeText}>Month</Text>
+            <Text style={styles.amountsTimeText}>{translate('month')}</Text>
             <Text style={styles.amountsText}>{`${currency}${device.amounts.month}`}</Text>
           </View>
           <View style={styles.box}>
-            <Text style={styles.amountsTimeText}>Year</Text>
+            <Text style={styles.amountsTimeText}>{translate('year')}</Text>
             <Text style={styles.amountsText}>{`${currency}${device.amounts.year}`}</Text>
           </View>
         </View>

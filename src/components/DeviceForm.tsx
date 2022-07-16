@@ -4,6 +4,7 @@ import { ActivityIndicator, Avatar, Button, IconButton, Modal, Portal, TextInput
 import { heightPercentageToDP as hp, widthPercentageToDP as wp } from 'react-native-responsive-screen';
 import { iconList } from '../constants';
 import { PreferencesContext } from '../context/PreferencesContext';
+import useLocales from '../hooks/useLocales';
 import { devicesStorage, ModalMode } from '../screens/Calculate';
 import { Device } from '../types';
 import { calculateDevice } from '../utils/calculator';
@@ -20,8 +21,9 @@ const DeviceForm = (props: DeviceFormProps) => {
   const [helperText, setHelperText] = useState<string>("");
   const [showHelperText, setShowHelperText] = useState<boolean>(false);
   const { device, handleClose, mode, index } = props;
-  const { currency , price } = useContext(PreferencesContext);
+  const { price } = useContext(PreferencesContext);
   const [iconModalOpened, setIconModalOpened] = useState<boolean>(false);
+  const { translate } = useLocales();
 
   useEffect(() => {
     setEditedDevice(device);
@@ -77,12 +79,12 @@ const DeviceForm = (props: DeviceFormProps) => {
     if (editedDevice) {
       // TODO: check for auto focus to related field
       if (editedDevice.dailyHours > 24 || editedDevice.dailyHours < 0) {
-        setHelperText("Daily hours must be between 0 and 24");
+        setHelperText(translate('daily-error'));
         setShowHelperText(true);
         return false;
       }
       if (editedDevice.weeklyDays > 7 || editedDevice.weeklyDays < 0) {
-        setHelperText("Daily hours must be between 0 and 7");
+        setHelperText(translate('weekly-error'));
         setShowHelperText(true);
         return false;
       }
@@ -95,7 +97,7 @@ const DeviceForm = (props: DeviceFormProps) => {
       <Portal>
         <Modal visible={iconModalOpened} onDismiss={hideModal} contentContainerStyle={styles.modalContainer}>
         <View style={styles.headerSection}>
-          <Text style={styles.headerText}>Pick an icon</Text>
+          <Text style={styles.headerText}>{translate('choose-icon')}</Text>
           <IconButton icon="close" size={14} onPress={hideModal} />
         </View>
           <FlatList
@@ -123,7 +125,7 @@ const DeviceForm = (props: DeviceFormProps) => {
         </Modal>
       </Portal>
       <View style={styles.headerSection}>
-        <Text style={styles.headerText}>Edit Device</Text>
+        <Text style={styles.headerText}>{translate('edit-device')}</Text>
         <IconButton icon="close" size={14} onPress={handleClose} />
       </View>
       {editedDevice ? (
@@ -134,7 +136,7 @@ const DeviceForm = (props: DeviceFormProps) => {
             </Pressable>
             <TextInput
               key="device-name"
-              label="Device Name"
+              label={translate('device-name')}
               mode='outlined'
               keyboardType='default'
               style={styles.rightTextBox}
@@ -146,7 +148,7 @@ const DeviceForm = (props: DeviceFormProps) => {
           <View style={styles.twoSelectionSection}>
             <TextInput
               key="watt"
-              label="Watt"
+              label={translate('watt')}
               mode="outlined"
               keyboardType='numeric'
               style={styles.leftTextBox}
@@ -155,7 +157,7 @@ const DeviceForm = (props: DeviceFormProps) => {
             />
             <TextInput
               key="count"
-              label="Count"
+              label={translate('piece-u')}
               mode='outlined'
               keyboardType='numeric'
               style={styles.rightTextBox}
@@ -167,7 +169,7 @@ const DeviceForm = (props: DeviceFormProps) => {
           <View style={styles.twoSelectionSection}>
             <TextInput
               key="hours"
-              label="Hours in a day"
+              label={translate('hours-day')}
               mode="outlined"
               keyboardType='numeric'
               style={styles.leftTextBox}
@@ -176,7 +178,7 @@ const DeviceForm = (props: DeviceFormProps) => {
             />
             <TextInput
               key="days"
-              label="Days in a week"
+              label={translate('days-week')}
               mode='outlined'
               keyboardType='numeric'
               style={styles.rightTextBox}
@@ -192,8 +194,8 @@ const DeviceForm = (props: DeviceFormProps) => {
           )}
 
 
-          <Button mode="contained" icon="content-save" style={styles.saveButton} onPress={handleSaveDevice}>Save Device</Button>
-          {mode === "edit" && <Button mode="contained" icon="delete" color='#D33F49' style={styles.saveButton} onPress={handleDeleteDevice}>Delete Device</Button>}
+          <Button mode="contained" icon="content-save" style={styles.saveButton} onPress={handleSaveDevice}>{translate('save-device')}</Button>
+          {mode === "edit" && <Button mode="contained" icon="delete" color='#D33F49' style={styles.saveButton} onPress={handleDeleteDevice}>{translate('delete-device')}</Button>}
         </>
       ) : (
         <ActivityIndicator animating={true} />
