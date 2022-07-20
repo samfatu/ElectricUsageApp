@@ -100,7 +100,7 @@ const Calculate = () => {
             </View>
           )}
         <View>
-          <Button mode="contained" icon="plus" onPress={handleAddDevice}>Add Device</Button>
+          <Button mode="contained" icon="plus" onPress={handleAddDevice}>{translate('add-device')}</Button>
         </View>
       </View>
     </View>
