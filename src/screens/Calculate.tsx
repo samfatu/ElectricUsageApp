@@ -10,6 +10,7 @@ import { PreferencesContext } from '../context/PreferencesContext';
 import useLocales from '../hooks/useLocales';
 import { Device, DeviceListCalculateResult, TotalAmount } from '../types';
 import { calculateTotal } from '../utils/calculator';
+import { printPrice } from '../utils/printPrice';
 
 export const devicesStorage = new MMKV({
   id: 'devices',
@@ -25,7 +26,7 @@ const Calculate = () => {
   const [editIndex, setEditIndex] = useState<number>(0);
   const [selectedDevice, setSelectedDevice] = useState<Device | null>(null);
   const [deviceListTotal, setDeviceListTotal] = useState<DeviceListCalculateResult | null>(null);
-  const { currency } = useContext(PreferencesContext);
+  const { currencySymbol, currencyLeft } = useContext(PreferencesContext);
   const { translate } = useLocales();
 
   useEffect(() => {
@@ -72,13 +73,13 @@ const Calculate = () => {
       <View style={styles.listContainer}>
         {devices.length > 0 ? (
           <FlatList
-          data={devices}
-          renderItem={(device) =>
-            <Pressable onPress={() => handleClickDevice(device.index)}>
-              <DeviceItem device={device.item} />
-            </Pressable>}
-          showsVerticalScrollIndicator={false}
-        />
+            data={devices}
+            renderItem={(device) =>
+              <Pressable onPress={() => handleClickDevice(device.index)}>
+                <DeviceItem device={device.item} />
+              </Pressable>}
+            showsVerticalScrollIndicator={false}
+          />
         ) :
         <Text>{translate('no-device')}</Text>}
       </View>
@@ -89,13 +90,13 @@ const Calculate = () => {
                 <Text>
                   <Text style={styles.reportResultText}>{deviceListTotal.totalKWMonth} kW</Text>
                   {"\t\t"}
-                  <Text style={styles.reportResultText}>{`${currency}${deviceListTotal.totalAmountMonth}`}</Text>
+                  <Text style={styles.reportResultText}>{printPrice(deviceListTotal.totalAmountMonth, currencySymbol, currencyLeft)}</Text>
                 </Text>
                 <Text>{translate('annual-total')}</Text>
                 <Text>
                   <Text style={styles.reportResultText}>{deviceListTotal.totalKWYear} kW</Text>
                   {"\t\t"}
-                  <Text style={styles.reportResultText}>{`${currency}${deviceListTotal.totalAmountYear}`}</Text>
+                  <Text style={styles.reportResultText}>{printPrice(deviceListTotal.totalAmountYear, currencySymbol, currencyLeft)}</Text>
                 </Text>
             </View>
           )}

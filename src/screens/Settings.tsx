@@ -6,14 +6,22 @@ import { currencySymbolList, languageList } from '../constants';
 import { PreferencesContext, preferencesStorage } from '../context/PreferencesContext';
 import useLocales from '../hooks/useLocales';
 import { Preferences } from '../types';
+import { getCurrencySymbol, getIsCurrencyLeft } from '../utils/currencyDetails';
 
 type SelectionType = "language" | "currency" | "price";
 
 const Settings = () => {
-  const { language , currency, price, changePreferences } = useContext(PreferencesContext);
+  const { language , currencyName, currencySymbol, currencyLeft, price, changePreferences } = useContext(PreferencesContext);
   const [selectionModalOpened, setSelectionModalOpened] = useState<boolean>(false);
   const [selectionType, setSelectionType] = useState<SelectionType>("language");
-  const [editedPreference, setEditedPreference] = useState<Preferences>({ language, currency, price, changePreferences });
+  const [editedPreference, setEditedPreference] = useState<Preferences>({
+    language,
+    currencyName,
+    currencySymbol,
+    currencyLeft,
+    price,
+    changePreferences
+  });
   const [visible, setVisible] = useState(false);
   const { changeLang, translate } = useLocales();
 
@@ -40,7 +48,12 @@ const Settings = () => {
         setEditedPreference({...editedPreference, language: preference as string });
         break;
       case 'currency':
-        setEditedPreference({...editedPreference, currency: preference as string });
+        setEditedPreference({
+          ...editedPreference,
+          currencyName: preference as string,
+          currencySymbol: getCurrencySymbol(preference as string),
+          currencyLeft: getIsCurrencyLeft(preference as string)
+        });
         break;
       case 'price':
         setEditedPreference({...editedPreference, price: preference as number });
@@ -51,7 +64,7 @@ const Settings = () => {
 
   const savePreferences = () => {
     preferencesStorage.set('language', editedPreference.language);
-    preferencesStorage.set('currency', editedPreference.currency);
+    preferencesStorage.set('currency', editedPreference.currencyName);
     preferencesStorage.set('price', Number(editedPreference.price.toFixed(6)));
 
     onToggleSnackBar();
@@ -108,7 +121,7 @@ const Settings = () => {
       <View style={styles.section}>
         <Text>{translate('choose-currency')}</Text>
         <Pressable style={styles.pickerContainer} onPress={openCurrencyList}>
-          <Text>{editedPreference.currency}</Text>
+          <Text>{editedPreference.currencyName}</Text>
         </Pressable>
       </View>
       <View style={styles.section}>

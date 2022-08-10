@@ -38,7 +38,9 @@ export class DeviceListCalculateResult {
 
 export class Preferences {
   constructor(
-    public currency: string,
+    public currencySymbol: string,
+    public currencyName: string,
+    public currencyLeft: boolean,
     public price: number,
     public language: string,
     public changePreferences: Function,

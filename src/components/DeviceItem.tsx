@@ -6,6 +6,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import { PreferencesContext } from '../context/PreferencesContext';
 import useLocales from '../hooks/useLocales';
 import { Device } from '../types';
+import { printPrice } from '../utils/printPrice';
 
 interface DeviceItemProps {
   device: Device;
@@ -13,8 +14,8 @@ interface DeviceItemProps {
 
 const DeviceItem = (props: DeviceItemProps) => {
   const { device } = props;
-  const { currency } = useContext(PreferencesContext);
   const { translate } = useLocales();
+  const { currencySymbol, currencyLeft } = useContext(PreferencesContext);
 
   return (
     <View style={styles.container}>
@@ -32,19 +33,19 @@ const DeviceItem = (props: DeviceItemProps) => {
         <View style={{ display: 'flex', flexDirection: 'row', flex: 1, justifyContent: 'space-around' }}>
           <View style={styles.box}>
             <Text style={styles.amountsTimeText}>{translate('day')}</Text>
-            <Text style={styles.amountsText}>{`${currency}${device.amounts.day}`}</Text>
+            <Text style={styles.amountsText}>{printPrice(device.amounts.day, currencySymbol, currencyLeft)}</Text>
           </View>
           <View style={styles.box}>
             <Text style={styles.amountsTimeText}>{translate('week')}</Text>
-            <Text style={styles.amountsText}>{`${currency}${device.amounts.week}`}</Text>
+            <Text style={styles.amountsText}>{printPrice(device.amounts.week, currencySymbol, currencyLeft)}</Text>
           </View>
           <View style={styles.box}>
             <Text style={styles.amountsTimeText}>{translate('month')}</Text>
-            <Text style={styles.amountsText}>{`${currency}${device.amounts.month}`}</Text>
+            <Text style={styles.amountsText}>{printPrice(device.amounts.month, currencySymbol, currencyLeft)}</Text>
           </View>
           <View style={styles.box}>
             <Text style={styles.amountsTimeText}>{translate('year')}</Text>
-            <Text style={styles.amountsText}>{`${currency}${device.amounts.year}`}</Text>
+            <Text style={styles.amountsText}>{printPrice(device.amounts.year, currencySymbol, currencyLeft)}</Text>
           </View>
         </View>
       </View>
