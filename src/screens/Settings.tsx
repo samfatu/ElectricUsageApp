@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import { FlatList, Pressable, StyleSheet, Text, View } from 'react-native';
+import { FlatList, Keyboard, Pressable, StyleSheet, Text, View } from 'react-native';
 import { Button, Modal, Portal, Snackbar, TextInput } from 'react-native-paper';
 import { heightPercentageToDP as hp, widthPercentageToDP as wp } from 'react-native-responsive-screen';
 import { currencySymbolList, languageList } from '../constants';
@@ -22,6 +22,7 @@ const Settings = () => {
     price,
     changePreferences
   });
+  const [priceHandle, setPriceHandle] = useState(price.toString());
   const [visible, setVisible] = useState(false);
   const { changeLang, translate } = useLocales();
 
@@ -55,17 +56,15 @@ const Settings = () => {
           currencyLeft: getIsCurrencyLeft(preference as string)
         });
         break;
-      case 'price':
-        setEditedPreference({...editedPreference, price: preference as number });
-        break;
     }
     hideModal();
   }
 
   const savePreferences = () => {
+    Keyboard.dismiss();
     preferencesStorage.set('language', editedPreference.language);
     preferencesStorage.set('currency', editedPreference.currencyName);
-    preferencesStorage.set('price', Number(editedPreference.price.toFixed(6)));
+    preferencesStorage.set('price', priceHandle === "" ? 1 : Number(parseFloat(priceHandle).toFixed(6)));
 
     onToggleSnackBar();
   }
@@ -129,8 +128,16 @@ const Settings = () => {
         <View style={{...styles.pickerContainer, height: 'auto', padding: 0 }}>
           <TextInput
             style={styles.priceInput}
-            value={editedPreference.price.toString()}
-            onChangeText={(text) => changePreference('price', Number(text))}
+            value={priceHandle}
+            onChangeText={(text) => {
+              if (text.match(/^[0-9.]+$/) && text.length < 12) {
+                 if (!(text.split(".").length > 2 && text.slice(-1) === ".")) {
+                  setPriceHandle(text);
+                }
+              } else if (text === "") {
+                setPriceHandle("");
+              }
+            }}
             keyboardType='numeric'
           />
         </View>
