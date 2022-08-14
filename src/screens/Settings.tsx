@@ -141,6 +141,8 @@ const Settings = () => {
             keyboardType='numeric'
           />
         </View>
+        <Text style={{ fontSize: 12, marginTop: hp(1) }}><Text>* </Text>{translate("help-text")}</Text>
+        <Text style={{ fontSize: 12 }}>{translate("help-note")}</Text>
       </View>
       <Button mode='contained' onPress={savePreferences}>{translate('save-preferences')}</Button>
     </View>
