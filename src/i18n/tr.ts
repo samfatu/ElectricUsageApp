@@ -28,8 +28,10 @@ const tr = {
   "choose-language":	"Dil tercihinizi seçin",
   "choose-currency":	"Para birimi tercihinizi seçin",
   "enter-price":	"Ülkenize kilowatt başına fiyatı girin",
-  "save-preferences":	"Tercihleri ​​Kaydet",
+  "save-preferences":	"Tercihleri Kaydet",
   "preferences-success": "Tercihler başarıyla değiştirildi.",
+  "help-text": "Ülkenizdeki kilowatt başına elektrik fiyatını bulmak için, arama kutusuna \"ABC'de Kilowatt başına elektrik fiyatı\" yazarak Google'da arama yapabilirsiniz.",
+  "help-note": "Not: ABC'yi ülkenizin adıyla değiştirmeyi unutmayın. :)",
 };
 
 export default tr;

@@ -30,6 +30,8 @@ const pr = {
   "enter-price":	"Entre no preço por quilowatt em seu país",
   "save-preferences":	"Salvar preferências",
   "preferences-success": "As preferências foram alteradas com sucesso.",
+  "help-text": "Para descobrir o preço da eletricidade por quilowatt em seu país, você pode pesquisar no Google digitando \"Preço de eletricidade por quilowatt no ABC\" na caixa de pesquisa.",
+  "help-note": "Nota: Não se esqueça de substituir o ABC pelo nome do seu país. :)",
 };
 
 export default pr;

@@ -30,6 +30,8 @@ const ch = {
   "enter-price":	"输入您所在国家 /千瓦的价格",
   "save-preferences":	"保存首选项",
   "preferences-success": "偏好已成功改变。",
+  "help-text": "为了找出您所在国家 /地区的每千瓦的电价，您可以在Google上搜索搜索框中的“每千瓦时ABC的电价”。",
+  "help-note": "注意：不要忘记用您所在国家的名字替换ABC。 :)",
 };
 
 export default ch;

@@ -30,6 +30,8 @@ const jp = {
   "enter-price":	"あなたの国のキロワットあたりの価格を入力してください",
   "save-preferences":	"設定を保存します",
   "preferences-success": "好みは正常に変更されました。",
+  "help-text": "お住まいの国のキロワットあたりの電気価格を見つけるには、検索ボックスで「ABCのキロワットあたりの電力価格」を入力して、Googleで検索できます。",
+  "help-note": "注：ABCをあなたの国の名前に置き換えることを忘れないでください。 :)",
 };
 
 export default jp;

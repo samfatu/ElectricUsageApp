@@ -30,6 +30,8 @@ const es = {
   "enter-price":	"Ingrese el precio por kilovatio en su país",
   "save-preferences":	"Guardar preferencias",
   "preferences-success": "Las preferencias se han cambiado con éxito.",
+  "help-text": "Para averiguar el precio de electricidad por kilovatio en su país, puede buscar en Google escribiendo \"precio de electricidad por kilovatio en ABC\" en el cuadro de búsqueda.",
+  "help-note": "Nota: No olvide reemplazar ABC con el nombre de su país. :)",
 };
 
 export default es;

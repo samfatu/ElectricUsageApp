@@ -30,6 +30,8 @@ const ko = {
   "enter-price":	"당신의 나라에서 킬로와트 당 가격을 입력하십시오",
   "save-preferences":	"환경 설정을 저장하십시오",
   "preferences-success": "선호도가 성공적으로 변경되었습니다.",
+  "help-text": "귀하의 국가에서 킬로와트 당 전기 가격을 찾으려면 검색 창에서 \"ABC의 킬로와트 당 전기 가격\"을 입력하여 Google에서 검색 할 수 있습니다.",
+  "help-note": "참고 : ABC를 국가 이름으로 대체하는 것을 잊지 마십시오. :)",
 };
 
 export default ko;

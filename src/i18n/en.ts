@@ -30,6 +30,8 @@ const en = {
   "enter-price":	"Enter the price per kilowatt in your country",
   "save-preferences":	"Save Preferences",
   "preferences-success": "Preferences have been successfully changed.",
+  "help-text": "To find out the electricity price per kilowatt in your country, you can search on Google by typing \"electricity price per kilowatt in ABC\" in the search box.",
+  "help-note": "Note: Don't forget to replace ABC with your country's name. :)",
 };
 
 export default en;

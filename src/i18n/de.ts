@@ -30,6 +30,8 @@ const de = {
   "enter-price":	"Geben Sie den Preis pro Kilowatt in Ihrem Land ein",
   "save-preferences":	"Präferenzen speichern",
   "preferences-success": "Die Vorlieben wurden erfolgreich verändert.",
+  "help-text": "Um den Strompreis pro Kilowatt in Ihrem Land herauszufinden, können Sie in Google nach \"Strompreis pro Kilowatt in ABC\" im Suchfeld suchen.",
+  "help-note": "Hinweis: Vergessen Sie nicht, ABC durch den Namen Ihres Landes zu ersetzen. :)",
 };
 
 export default de;
