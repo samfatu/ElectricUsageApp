@@ -55,7 +55,11 @@ const PreferencesProvider = ({ children }: { children: ReactNode }) => {
         })
       } else if (changedKey === 'language') {
         setPreferences({...preferences, language: newValue});
-      } else {
+      }
+    } else {
+      const newValue = preferencesStorage.getNumber(changedKey);
+
+      if (newValue) {
         setPreferences({...preferences, price: Number(newValue)});
       }
     }
