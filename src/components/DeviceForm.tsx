@@ -1,9 +1,8 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { FlatList, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { ActivityIndicator, Avatar, Button, IconButton, Modal, Portal, TextInput } from 'react-native-paper';
 import { heightPercentageToDP as hp, widthPercentageToDP as wp } from 'react-native-responsive-screen';
 import { iconList } from '../constants';
-import { PreferencesContext } from '../context/PreferencesContext';
 import useLocales from '../hooks/useLocales';
 import { devicesStorage, ModalMode } from '../screens/Calculate';
 import { Device } from '../types';
@@ -13,6 +12,7 @@ interface DeviceFormProps {
   device: Device;
   handleClose: () => void;
   mode: ModalMode;
+  price: number;
   index?: number;
 }
 
@@ -20,8 +20,7 @@ const DeviceForm = (props: DeviceFormProps) => {
   const [editedDevice, setEditedDevice] = useState<Device | null>(null);
   const [helperText, setHelperText] = useState<string>("");
   const [showHelperText, setShowHelperText] = useState<boolean>(false);
-  const { device, handleClose, mode, index } = props;
-  const { price } = useContext(PreferencesContext);
+  const { device, handleClose, mode, price, index } = props;
   const [iconModalOpened, setIconModalOpened] = useState<boolean>(false);
   const { translate } = useLocales();
 

@@ -26,7 +26,7 @@ const Calculate = () => {
   const [editIndex, setEditIndex] = useState<number>(0);
   const [selectedDevice, setSelectedDevice] = useState<Device | null>(null);
   const [deviceListTotal, setDeviceListTotal] = useState<DeviceListCalculateResult | null>(null);
-  const { currencySymbol, currencyLeft } = useContext(PreferencesContext);
+  const { currencySymbol, currencyLeft, price } = useContext(PreferencesContext);
   const { translate } = useLocales();
 
   useEffect(() => {
@@ -66,7 +66,7 @@ const Calculate = () => {
       <Portal>
         <Modal visible={editModalOpened} onDismiss={hideModal} contentContainerStyle={styles.modalContainer}>
           <KeyboardAvoidingView behavior='height' enabled>
-            {selectedDevice && <DeviceForm device={selectedDevice} handleClose={hideModal} mode={modalMode} index={editIndex} />}
+            {selectedDevice && <DeviceForm device={selectedDevice} handleClose={hideModal} mode={modalMode} price={price} index={editIndex} />}
           </KeyboardAvoidingView>
         </Modal>
       </Portal>
