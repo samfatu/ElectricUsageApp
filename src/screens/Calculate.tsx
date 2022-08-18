@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { FlatList, KeyboardAvoidingView, Pressable, StyleSheet, Text, View } from 'react-native';
 import { MMKV } from 'react-native-mmkv';
-import { Button, Modal, Portal } from 'react-native-paper';
+import { FAB, Modal, Portal } from 'react-native-paper';
 import { heightPercentageToDP as hp, widthPercentageToDP as wp } from 'react-native-responsive-screen';
 import uuid from 'react-native-uuid';
 import DeviceForm from '../components/DeviceForm';
@@ -70,10 +70,41 @@ const Calculate = () => {
           </KeyboardAvoidingView>
         </Modal>
       </Portal>
+      <FAB
+        icon="plus"
+        style={styles.fab}
+        onPress={handleAddDevice}
+      />
+      <View style={styles.reportBoxContainer}>
+          {deviceListTotal && (
+            <View style={styles.reportBox}>
+                <View style={{ display: 'flex', flexDirection: 'row' }}>
+                  <Text>{translate('monthly-total')}</Text>
+                  <Text>
+                    {"\t"}
+                    <Text style={styles.reportResultText}>{deviceListTotal.totalKWMonth} kW, </Text>
+                    <Text style={styles.reportResultText}>{printPrice(deviceListTotal.totalAmountMonth, currencySymbol, currencyLeft)}</Text>
+                  </Text>
+                </View>
+                <View style={{ display: 'flex', flexDirection: 'row' }}>
+                  <Text>{translate('annual-total')}</Text>
+                  <Text>
+                    {"\t"}
+                    <Text style={styles.reportResultText}>{deviceListTotal.totalKWYear} kW, </Text>
+                    <Text style={styles.reportResultText}>{printPrice(deviceListTotal.totalAmountYear, currencySymbol, currencyLeft)}</Text>
+                  </Text>
+                </View>
+            </View>
+          )}
+        {/* <View>
+          <Button mode="contained" icon="plus" onPress={handleAddDevice}>{translate('add-device')}</Button>
+        </View> */}
+      </View>
       <View style={styles.listContainer}>
         {devices.length > 0 ? (
           <FlatList
             data={devices}
+            // style={{ paddingBottom: hp(5) }}
             renderItem={(device) =>
               <Pressable onPress={() => handleClickDevice(device.index)}>
                 <DeviceItem device={device.item} />
@@ -83,27 +114,7 @@ const Calculate = () => {
         ) :
         <Text>{translate('no-device')}</Text>}
       </View>
-      <View style={styles.reportBoxContainer}>
-          {deviceListTotal && (
-            <View style={styles.reportBox}>
-                <Text>{translate('monthly-total')}</Text>
-                <Text>
-                  <Text style={styles.reportResultText}>{deviceListTotal.totalKWMonth} kW</Text>
-                  {"\t\t"}
-                  <Text style={styles.reportResultText}>{printPrice(deviceListTotal.totalAmountMonth, currencySymbol, currencyLeft)}</Text>
-                </Text>
-                <Text>{translate('annual-total')}</Text>
-                <Text>
-                  <Text style={styles.reportResultText}>{deviceListTotal.totalKWYear} kW</Text>
-                  {"\t\t"}
-                  <Text style={styles.reportResultText}>{printPrice(deviceListTotal.totalAmountYear, currencySymbol, currencyLeft)}</Text>
-                </Text>
-            </View>
-          )}
-        <View>
-          <Button mode="contained" icon="plus" onPress={handleAddDevice}>{translate('add-device')}</Button>
-        </View>
-      </View>
+
     </View>
   )
 }
@@ -113,7 +124,8 @@ export default Calculate
 const styles = StyleSheet.create({
   container: {
     width: wp(100),
-    height: hp(90),
+    height: '100%',
+    display: 'flex',
   },
   modalContainer: {
     backgroundColor: 'white',
@@ -123,26 +135,33 @@ const styles = StyleSheet.create({
     paddingVertical: hp(2),
   },
   listContainer: {
-    width: wp(100),
-    height: hp(78),
+    width: '100%',
+    marginBottom: hp(6),
     paddingHorizontal: wp(4),
     paddingTop: hp(1)
   },
   reportBoxContainer: {
-    width: wp(100),
-    height: hp(12),
+    width: '100%',
     display: 'flex',
     alignItems: 'center',
     flexDirection: 'row',
     justifyContent: 'space-around',
-    position: 'absolute',
-    bottom: 0,
     backgroundColor: '#e0e0e0',
   },
   reportBox: {
-
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center'
   },
   reportResultText: {
     color: '#D33F49'
+  },
+  fab: {
+    position: 'absolute',
+    backgroundColor: '#63d471',
+    margin: 16,
+    right: 0,
+    bottom: 0,
+    zIndex: 10001
   }
 })
