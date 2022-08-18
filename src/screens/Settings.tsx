@@ -65,7 +65,7 @@ const Settings = () => {
     preferencesStorage.set('language', editedPreference.language);
     preferencesStorage.set('currency', editedPreference.currencyName);
     preferencesStorage.set('price', priceHandle === "" ? 1 : Number(parseFloat(priceHandle).toFixed(6)));
-
+    changePreferences({...editedPreference});
     onToggleSnackBar();
   }
 
