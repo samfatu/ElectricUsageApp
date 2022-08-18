@@ -10,6 +10,7 @@ const pr = {
   "annual-total":	"Total anual:",
   "daily-error": "O horário por dia deve estar entre 0 e 24.",
   "weekly-error": "Dias por semana O valor deve estar entre 0 e 7.",
+  "name-error": "O nome do dispositivo não pode ser nulo.",
   "choose-icon": "Escolha um ícone",
   "add-device":	"Adicionar Dispositivo",
   "device-name":	"Nome do dispositivo",

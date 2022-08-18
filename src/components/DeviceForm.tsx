@@ -77,12 +77,17 @@ const DeviceForm = (props: DeviceFormProps) => {
   const validateInputs = () => {
     if (editedDevice) {
       // TODO: check for auto focus to related field
-      if (editedDevice.dailyHours > 24 || editedDevice.dailyHours < 0) {
+      if (editedDevice.name === "") {
+        setHelperText(translate('name-error'));
+        setShowHelperText(true);
+        return false;
+      }
+      if (editedDevice.dailyHours > 24 || editedDevice.dailyHours <= 0) {
         setHelperText(translate('daily-error'));
         setShowHelperText(true);
         return false;
       }
-      if (editedDevice.weeklyDays > 7 || editedDevice.weeklyDays < 0) {
+      if (editedDevice.weeklyDays > 7 || editedDevice.weeklyDays <= 0) {
         setHelperText(translate('weekly-error'));
         setShowHelperText(true);
         return false;

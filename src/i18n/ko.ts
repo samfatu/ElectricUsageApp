@@ -10,6 +10,7 @@ const ko = {
   "annual-total":	"연간 총 :",
   "daily-error": "하루에 시간은 0과 24 사이 여야합니다.",
   "weekly-error": "주당 값은 0과 7 사이 여야합니다.",
+  "name-error": "장치 이름은 null이 될 수 없습니다.",
   "choose-icon": "아이콘을 선택하십시오",
   "add-device":	"기기 추가",
   "device-name":	"장치 이름",

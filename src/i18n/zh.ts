@@ -10,6 +10,7 @@ const ch = {
   "annual-total":	"年度总数：",
   "daily-error": "每天的时间必须在0到24之间。",
   "weekly-error": "每周的天数必须在0到7之间。",
+  "name-error": "设备名称不能为null。",
   "choose-icon": "选择一个图标",
   "add-device":	"添加设备",
   "device-name":	"设备名称",

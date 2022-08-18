@@ -10,6 +10,7 @@ const en = {
   "annual-total":	"Annual total:",
   "daily-error": "Hours per day must be between 0 and 24.",
   "weekly-error": "Days per week value must be between 0 and 7.",
+  "name-error": "Device name can not be null.",
   "choose-icon": "Choose an icon",
   "add-device":	"Add Device",
   "device-name":	"Device Name",

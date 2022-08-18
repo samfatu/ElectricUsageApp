@@ -10,6 +10,7 @@ const es = {
   "annual-total":	"Total anual:",
   "daily-error": "Las horas por día deben ser entre 0 y 24.",
   "weekly-error": "El valor de los días por semana debe ser entre 0 y 7.",
+  "name-error": "El nombre del dispositivo no puede ser nulo.",
   "choose-icon": "Elige un icono",
   "add-device":	"Añadir dispositivo",
   "device-name":	"Nombre del dispositivo",

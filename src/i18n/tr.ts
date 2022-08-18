@@ -10,6 +10,7 @@ const tr = {
   "annual-total":	"Yıllık Toplam:",
   "daily-error": "Günde saatler 0 ile 24 arasında olmalıdır.",
   "weekly-error": "Haftada gün değer 0 ile 7 arasında olmalıdır.",
+  "name-error": "Cihaz adı boş bırakılamaz.",
   "choose-icon": "Bir simge seçin",
   "add-device":	"Cihaz ekle",
   "device-name":	"Cihaz adı",

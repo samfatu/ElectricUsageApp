@@ -10,6 +10,7 @@ const de = {
   "annual-total":	"Jährliche Gesamtsumme:",
   "daily-error": "Die Stunden pro Tag müssen zwischen 0 und 24 liegen.",
   "weekly-error": "Der Wert pro Woche muss zwischen 0 und 7 liegen.",
+  "name-error": "Der Gerätename kann nicht null sein.",
   "choose-icon": "Wählen Sie ein Symbol aus",
   "add-device":	"Gerät hinzufügen",
   "device-name":	"Gerätename",

@@ -10,6 +10,7 @@ const jp = {
   "annual-total":	"年間合計：",
   "daily-error": "1日あたりの時間は0〜24でなければなりません。",
   "weekly-error": "週ごとの価値は0〜7でなければなりません。",
+  "name-error": "デバイス名はヌルではありません。",
   "choose-icon": "アイコンを選択します",
   "add-device":	"デバイスを追加",
   "device-name":	"装置名",
