@@ -10,6 +10,7 @@ const tr = {
   "annual-total":	"Yıllık Toplam:",
   "daily-error": "Günde saatler 0 ile 24 arasında olmalıdır.",
   "weekly-error": "Haftada gün değer 0 ile 7 arasında olmalıdır.",
+  "name-error": "Cihaz adı boş bırakılamaz.",
   "choose-icon": "Bir simge seçin",
   "add-device":	"Cihaz ekle",
   "device-name":	"Cihaz adı",
@@ -28,8 +29,10 @@ const tr = {
   "choose-language":	"Dil tercihinizi seçin",
   "choose-currency":	"Para birimi tercihinizi seçin",
   "enter-price":	"Ülkenize kilowatt başına fiyatı girin",
-  "save-preferences":	"Tercihleri ​​Kaydet",
+  "save-preferences":	"Tercihleri Kaydet",
   "preferences-success": "Tercihler başarıyla değiştirildi.",
+  "help-text": "Ülkenizdeki kilowatt başına elektrik fiyatını bulmak için, arama kutusuna \"ABC'de Kilowatt başına elektrik fiyatı\" yazarak Google'da arama yapabilirsiniz.",
+  "help-note": "Not: ABC'yi ülkenizin adıyla değiştirmeyi unutmayın. :)",
 };
 
 export default tr;

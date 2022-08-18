@@ -10,6 +10,7 @@ const jp = {
   "annual-total":	"年間合計：",
   "daily-error": "1日あたりの時間は0〜24でなければなりません。",
   "weekly-error": "週ごとの価値は0〜7でなければなりません。",
+  "name-error": "デバイス名はヌルではありません。",
   "choose-icon": "アイコンを選択します",
   "add-device":	"デバイスを追加",
   "device-name":	"装置名",
@@ -30,6 +31,8 @@ const jp = {
   "enter-price":	"あなたの国のキロワットあたりの価格を入力してください",
   "save-preferences":	"設定を保存します",
   "preferences-success": "好みは正常に変更されました。",
+  "help-text": "お住まいの国のキロワットあたりの電気価格を見つけるには、検索ボックスで「ABCのキロワットあたりの電力価格」を入力して、Googleで検索できます。",
+  "help-note": "注：ABCをあなたの国の名前に置き換えることを忘れないでください。 :)",
 };
 
 export default jp;

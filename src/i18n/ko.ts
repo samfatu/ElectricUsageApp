@@ -10,6 +10,7 @@ const ko = {
   "annual-total":	"연간 총 :",
   "daily-error": "하루에 시간은 0과 24 사이 여야합니다.",
   "weekly-error": "주당 값은 0과 7 사이 여야합니다.",
+  "name-error": "장치 이름은 null이 될 수 없습니다.",
   "choose-icon": "아이콘을 선택하십시오",
   "add-device":	"기기 추가",
   "device-name":	"장치 이름",
@@ -30,6 +31,8 @@ const ko = {
   "enter-price":	"당신의 나라에서 킬로와트 당 가격을 입력하십시오",
   "save-preferences":	"환경 설정을 저장하십시오",
   "preferences-success": "선호도가 성공적으로 변경되었습니다.",
+  "help-text": "귀하의 국가에서 킬로와트 당 전기 가격을 찾으려면 검색 창에서 \"ABC의 킬로와트 당 전기 가격\"을 입력하여 Google에서 검색 할 수 있습니다.",
+  "help-note": "참고 : ABC를 국가 이름으로 대체하는 것을 잊지 마십시오. :)",
 };
 
 export default ko;

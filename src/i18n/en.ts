@@ -10,6 +10,7 @@ const en = {
   "annual-total":	"Annual total:",
   "daily-error": "Hours per day must be between 0 and 24.",
   "weekly-error": "Days per week value must be between 0 and 7.",
+  "name-error": "Device name can not be null.",
   "choose-icon": "Choose an icon",
   "add-device":	"Add Device",
   "device-name":	"Device Name",
@@ -30,6 +31,8 @@ const en = {
   "enter-price":	"Enter the price per kilowatt in your country",
   "save-preferences":	"Save Preferences",
   "preferences-success": "Preferences have been successfully changed.",
+  "help-text": "To find out the electricity price per kilowatt in your country, you can search on Google by typing \"electricity price per kilowatt in ABC\" in the search box.",
+  "help-note": "Note: Don't forget to replace ABC with your country's name. :)",
 };
 
 export default en;

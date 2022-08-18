@@ -10,6 +10,7 @@ const de = {
   "annual-total":	"Jährliche Gesamtsumme:",
   "daily-error": "Die Stunden pro Tag müssen zwischen 0 und 24 liegen.",
   "weekly-error": "Der Wert pro Woche muss zwischen 0 und 7 liegen.",
+  "name-error": "Der Gerätename kann nicht null sein.",
   "choose-icon": "Wählen Sie ein Symbol aus",
   "add-device":	"Gerät hinzufügen",
   "device-name":	"Gerätename",
@@ -30,6 +31,8 @@ const de = {
   "enter-price":	"Geben Sie den Preis pro Kilowatt in Ihrem Land ein",
   "save-preferences":	"Präferenzen speichern",
   "preferences-success": "Die Vorlieben wurden erfolgreich verändert.",
+  "help-text": "Um den Strompreis pro Kilowatt in Ihrem Land herauszufinden, können Sie in Google nach \"Strompreis pro Kilowatt in ABC\" im Suchfeld suchen.",
+  "help-note": "Hinweis: Vergessen Sie nicht, ABC durch den Namen Ihres Landes zu ersetzen. :)",
 };
 
 export default de;

@@ -34,6 +34,7 @@ const Home = (props: NativeStackHeaderProps) => {
         </View>
       </Pressable>
 
+      {/* TODO: will be available on next version
       <Pressable onPress={() => navigation.navigate('Information')} >
         <View style={styles.box}>
           <View style={styles.boxContainer}>
@@ -41,7 +42,7 @@ const Home = (props: NativeStackHeaderProps) => {
             <Text style={styles.boxTitle}>{translate('information-menu')}</Text>
           </View>
         </View>
-      </Pressable>
+      </Pressable> */}
     </View>
   )
 }
