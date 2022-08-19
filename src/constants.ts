@@ -1,3 +1,4 @@
+import { Preferences } from "./types";
 
 export const iconList = [
   "cog",
@@ -44,3 +45,93 @@ export const currencySymbolList = [
   { name: 'Ruble', symbol: "p.", left: false },
   { name: 'Riyal', symbol: "﷼", left: false }
 ]
+
+export const enDefaultValues: Preferences = {
+  currencySymbol: '$',
+  currencyName: 'Dollar',
+  currencyLeft: true,
+  price: 1,
+  language: 'en-US',
+  changePreferences: () => {}
+}
+
+export const trDefaultValues: Preferences = {
+  currencySymbol: '₺',
+  currencyName: 'Türk Lirası',
+  currencyLeft: false,
+  price: 1,
+  language: 'tr-TR',
+  changePreferences: () => {}
+}
+
+export const deDefaultValues: Preferences = {
+  currencySymbol: '€',
+  currencyName: 'Euro',
+  currencyLeft: true,
+  price: 1,
+  language: 'de-DE',
+  changePreferences: () => {}
+}
+
+export const arDefaultValues: Preferences = {
+  currencySymbol: '﷼',
+  currencyName: 'Riyal',
+  currencyLeft: false,
+  price: 1,
+  language: 'ar-SA',
+  changePreferences: () => {}
+}
+
+export const esDefaultValues: Preferences = {
+  currencySymbol: '€',
+  currencyName: 'Euro',
+  currencyLeft: true,
+  price: 1,
+  language: 'es-ES',
+  changePreferences: () => {}
+}
+
+export const frDefaultValues: Preferences = {
+  currencySymbol: '€',
+  currencyName: 'Euro',
+  currencyLeft: true,
+  price: 1,
+  language: 'fr-FR',
+  changePreferences: () => {}
+}
+
+export const jaDefaultValues: Preferences = {
+  currencySymbol: '¥',
+  currencyName: 'Yen',
+  currencyLeft: true,
+  price: 1,
+  language: 'ja-JP',
+  changePreferences: () => {}
+}
+
+export const koDefaultValues: Preferences = {
+  currencySymbol: '₩',
+  currencyName: 'Won',
+  currencyLeft: true,
+  price: 1,
+  language: 'ko-KR',
+  changePreferences: () => {}
+}
+
+export const ptDefaultValues: Preferences = {
+  currencySymbol: '€',
+  currencyName: 'Euro',
+  currencyLeft: true,
+  price: 1,
+  language: 'pt-PT',
+  changePreferences: () => {}
+}
+
+export const zhDefaultValues: Preferences = {
+  currencySymbol: '$',
+  currencyName: 'Dollar',
+  currencyLeft: true,
+  price: 1,
+  language: 'zh-CN',
+  changePreferences: () => {}
+}

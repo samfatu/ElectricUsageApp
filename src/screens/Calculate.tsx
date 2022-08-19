@@ -96,15 +96,11 @@ const Calculate = () => {
                 </View>
             </View>
           )}
-        {/* <View>
-          <Button mode="contained" icon="plus" onPress={handleAddDevice}>{translate('add-device')}</Button>
-        </View> */}
       </View>
       <View style={styles.listContainer}>
         {devices.length > 0 ? (
           <FlatList
             data={devices}
-            // style={{ paddingBottom: hp(5) }}
             renderItem={(device) =>
               <Pressable onPress={() => handleClickDevice(device.index)}>
                 <DeviceItem device={device.item} />
@@ -114,7 +110,6 @@ const Calculate = () => {
         ) :
         <Text>{translate('no-device')}</Text>}
       </View>
-
     </View>
   )
 }

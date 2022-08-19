@@ -65,7 +65,8 @@ const Settings = () => {
     preferencesStorage.set('language', editedPreference.language);
     preferencesStorage.set('currency', editedPreference.currencyName);
     preferencesStorage.set('price', priceHandle === "" ? 1 : Number(parseFloat(priceHandle).toFixed(6)));
-    changePreferences({...editedPreference});
+    changePreferences();
+
     onToggleSnackBar();
   }
 
@@ -83,7 +84,7 @@ const Settings = () => {
                   onPress={() => changePreference('language', item.item.symbol)}
                   android_ripple={{ color: '#e0e0e0'}}
                 >
-                  <Text>{item.item.name}</Text>
+                  <Text style={{ color: '#333333' }}>{item.item.name}</Text>
                 </Pressable>
               )}
             />
@@ -97,7 +98,7 @@ const Settings = () => {
                   onPress={() => changePreference('currency', item.item.name)}
                   android_ripple={{ color: '#e0e0e0'}}
                 >
-                  <Text>{item.item.name}</Text>
+                  <Text style={{ color: '#333333' }}>{item.item.name}</Text>
                 </Pressable>
               )}
             />
@@ -112,19 +113,19 @@ const Settings = () => {
         {translate('preferences-success')}
       </Snackbar>
       <View style={styles.section}>
-        <Text>{translate('choose-language')}</Text>
+        <Text style={{ color: '#333333' }}>{translate('choose-language')}</Text>
         <Pressable style={styles.pickerContainer} onPress={openLanguageList}>
-          <Text>{languageList.find(lang => editedPreference.language === lang.symbol)?.name}</Text>
+          <Text style={{ color: '#333333' }}>{languageList.find(lang => editedPreference.language === lang.symbol)?.name}</Text>
         </Pressable>
       </View>
       <View style={styles.section}>
-        <Text>{translate('choose-currency')}</Text>
+        <Text style={{ color: '#333333' }}>{translate('choose-currency')}</Text>
         <Pressable style={styles.pickerContainer} onPress={openCurrencyList}>
-          <Text>{editedPreference.currencyName}</Text>
+          <Text style={{ color: '#333333' }}>{editedPreference.currencyName}</Text>
         </Pressable>
       </View>
       <View style={styles.section}>
-        <Text>{translate('enter-price')}</Text>
+        <Text style={{ color: '#333333' }}>{translate('enter-price')}</Text>
         <View style={{...styles.pickerContainer, height: 'auto', padding: 0 }}>
           <TextInput
             style={styles.priceInput}
@@ -141,8 +142,8 @@ const Settings = () => {
             keyboardType='numeric'
           />
         </View>
-        <Text style={{ fontSize: 12, marginTop: hp(1) }}><Text>* </Text>{translate("help-text")}</Text>
-        <Text style={{ fontSize: 12 }}>{translate("help-note")}</Text>
+        <Text style={{ fontSize: 12, marginTop: hp(1), color: '#333333' }}><Text>* </Text>{translate("help-text")}</Text>
+        <Text style={{ fontSize: 12, color: '#333333' }}>{translate("help-note")}</Text>
       </View>
       <Button mode='contained' onPress={savePreferences}>{translate('save-preferences')}</Button>
     </View>

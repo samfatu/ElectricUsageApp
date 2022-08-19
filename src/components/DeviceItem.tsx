@@ -78,9 +78,10 @@ const styles = StyleSheet.create({
   amountsTimeText: {
     fontSize: 12,
     borderBottomWidth: 0.5,
+    color: '#333333'
   },
   amountsText: {
-
+    color: '#333333'
   },
   summaryContainer: {
     display: 'flex',
@@ -91,9 +92,11 @@ const styles = StyleSheet.create({
   },
   deviceNameText: {
     fontWeight: 'bold',
+    color: '#333333'
   },
   deviceDetailsText: {
-    fontSize: 12
+    fontSize: 12,
+    color: '#333333'
   },
   amountsContainer: {
     display: 'flex',

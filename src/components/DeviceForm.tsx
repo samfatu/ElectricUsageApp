@@ -129,7 +129,7 @@ const DeviceForm = (props: DeviceFormProps) => {
         </Modal>
       </Portal>
       <View style={styles.headerSection}>
-        <Text style={styles.headerText}>{translate('edit-device')}</Text>
+        <Text style={styles.headerText}>{mode === "edit" ? translate('edit-device') : translate('add-device')}</Text>
         <IconButton icon="close" size={14} onPress={handleClose} />
       </View>
       {editedDevice ? (
@@ -230,7 +230,8 @@ const styles = StyleSheet.create({
   },
   headerText: {
     fontWeight: 'bold',
-    fontSize: 18
+    fontSize: 18,
+    color: '#000000'
   },
   nameAndAvatarSection: {
     display: 'flex',
